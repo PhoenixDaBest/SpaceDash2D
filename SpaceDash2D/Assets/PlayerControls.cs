@@ -5,13 +5,14 @@ using UnityEngine;
 public class PlayerControls : MonoBehaviour
 {
 
-    public bool right, left;
     public float moveSpeed = 5f; // Speed at which the object moves.
     public UI_Manager UI;
 
     public GameObject objectToSpawn; // The object you want to instantiate.
     public Transform spawnPoint1, spawnPoint2;     // The position where the object should be spawned.
     public float spawnInterval = 2f; // Time interval between spawns in seconds.
+
+    public int healthPoint;
 
     // Start is called before the first frame update
     void Start()
@@ -67,5 +68,14 @@ public class PlayerControls : MonoBehaviour
 
         // Move the object to the new position.
         transform.position = newPosition;
+    }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.CompareTag("astroid"))
+        {
+            col.gameObject.GetComponent<astroid>().gotHit();
+            healthPoint--;
+        }
     }
 }

@@ -11,11 +11,13 @@ public class UI_Manager : MonoBehaviour
     public void openSettingsPanel()
     {
         settingsPanel.SetActive(true);
+        Time.timeScale= 0;
         isPause = true;
     }
     public void closeSettingsPanel()
     {
         settingsPanel.SetActive(false);
+        Time.timeScale = 1;
         isPause = false;
     }
 
