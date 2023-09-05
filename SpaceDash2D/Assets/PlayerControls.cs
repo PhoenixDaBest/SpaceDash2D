@@ -8,16 +8,28 @@ public class PlayerControls : MonoBehaviour
     public float moveSpeed = 5f; // Speed at which the object moves.
     public UI_Manager UI;
 
+    public GameObject SpaceShip;
     public GameObject objectToSpawn; // The object you want to instantiate.
     public Transform spawnPoint1, spawnPoint2;     // The position where the object should be spawned.
     public float spawnInterval = 2f; // Time interval between spawns in seconds.
 
     public int healthPoint;
+    public bool hit = true;
+
+    public float screenWidth;
+
+    private Camera mainCamera;
+    private float minX, maxX;
+
 
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(SpawnObjects());
+        SpaceShip = GameObject.Find("spaceship");
+        hit = true;
+        mainCamera = Camera.main;       // Get a reference to the main camera
+        CalculateScreenBoundaries();    // Calculate screen boundaries in world coordinates
     }
 
     void Update()
@@ -28,7 +40,7 @@ public class PlayerControls : MonoBehaviour
             Touch touch = Input.GetTouch(i);
 
             // Get the screen width to determine the center.
-            float screenWidth = Screen.width;
+            screenWidth = Screen.width;
 
             // Check if the touch is on the left or right side of the screen.
             if (touch.position.x < screenWidth / 2)
@@ -42,6 +54,10 @@ public class PlayerControls : MonoBehaviour
                 Move(1);
             }
         }
+
+        Vector3 playerPosition = transform.position;
+        playerPosition.x = Mathf.Clamp(playerPosition.x, minX, maxX);
+        transform.position = playerPosition;
 
     }
 
@@ -75,7 +91,39 @@ public class PlayerControls : MonoBehaviour
         if (col.gameObject.CompareTag("astroid"))
         {
             col.gameObject.GetComponent<astroid>().gotHit();
-            healthPoint--;
+            if (hit)
+            {
+                hit = false;
+                healthPoint--;
+                StartCoroutine(gotHit());
+            }
         }
     }
+
+    IEnumerator gotHit()
+    {
+        for( int i = 0; i < 10; i++)
+        {
+            if (SpaceShip.activeInHierarchy)
+                SpaceShip.SetActive(false);
+            else
+                SpaceShip.SetActive(true);
+
+            yield return new WaitForSeconds(.1f);
+        }
+
+        hit = true;
+        
+    }
+
+    void CalculateScreenBoundaries()
+    {
+        // Calculate the minimum (left) and maximum (right) X coordinates of the screen
+        Vector3 leftBoundary = mainCamera.ScreenToWorldPoint(new Vector3(0, 0, mainCamera.transform.position.z));
+        Vector3 rightBoundary = mainCamera.ScreenToWorldPoint(new Vector3(Screen.width, 0, mainCamera.transform.position.z));
+
+        minX = leftBoundary.x;
+        maxX = rightBoundary.x;
+    }
+
 }
