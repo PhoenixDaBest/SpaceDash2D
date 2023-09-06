@@ -18,11 +18,18 @@ public class SceneManagers : MonoBehaviour
         
     }
 
-    public void playGame()
+    public void playIntro()
     {
         UIA.exit();
-        StartCoroutine(waitingToPlay(2, 1));
+        //StartCoroutine(waitingToPlay(2, 1));
         //SceneManager.LoadScene(1);
+    }
+
+    public void playGame()
+    {
+        Debug.Log("Its working");
+        UIA.exit();
+        StartCoroutine(waitingToPlay(2, 1));
     }
 
     IEnumerator waitingToPlay(float x, int scene)

@@ -153,6 +153,7 @@ Library: lib_burst_generated
 --root-assembly=C:\Users\Asus\Documents\GitHub\SpaceDash2D\SpaceDash2D\Temp\StagingArea\Data\Managed\Unity.Services.Core.Threading.dll
 --root-assembly=C:\Users\Asus\Documents\GitHub\SpaceDash2D\SpaceDash2D\Temp\StagingArea\Data\Managed\Unity.2D.Tilemap.Extras.dll
 --root-assembly=C:\Users\Asus\Documents\GitHub\SpaceDash2D\SpaceDash2D\Temp\StagingArea\Data\Managed\Unity.Services.Core.Networking.dll
+--root-assembly=C:\Users\Asus\Documents\GitHub\SpaceDash2D\SpaceDash2D\Temp\StagingArea\Data\Managed\Assembly-CSharp-firstpass.dll
 --root-assembly=C:\Users\Asus\Documents\GitHub\SpaceDash2D\SpaceDash2D\Temp\StagingArea\Data\Managed\Unity.InternalAPIEngineBridge.001.dll
 --root-assembly=C:\Users\Asus\Documents\GitHub\SpaceDash2D\SpaceDash2D\Temp\StagingArea\Data\Managed\Unity.Services.Core.Configuration.dll
 --assembly-folder=C:\Users\Asus\Documents\GitHub\SpaceDash2D\SpaceDash2D\Temp\StagingArea\Data\Managed\
