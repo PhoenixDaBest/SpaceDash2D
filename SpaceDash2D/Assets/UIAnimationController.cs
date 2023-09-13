@@ -217,10 +217,10 @@ public class UIAnimationController : MonoBehaviour
         loading.transform.DOMoveY(-454, duration);
 
         //right
-        oneHandedButton.transform.DOMoveX(1450, duration);
+        oneHandedButton.transform.DOMoveX(canvasWidth + 300, duration);
         oneHandedButton.transform.DOMoveY(middleHeight, duration);
         //left
-        twoHandedButton.transform.DOMoveX(-420, duration);
+        twoHandedButton.transform.DOMoveX(-200, duration);
         twoHandedButton.transform.DOMoveY(middleHeight, duration);
 
     }
