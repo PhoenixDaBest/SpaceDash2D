@@ -12,6 +12,7 @@ public class PlayerControls : MonoBehaviour
     public GameObject objectToSpawn; // The object you want to instantiate.
     public Transform spawnPoint1, spawnPoint2;     // The position where the object should be spawned.
     public float spawnInterval = 2f; // Time interval between spawns in seconds.
+    public bool shoot;
 
     public int healthPoint;
     public bool hit = true;
@@ -25,7 +26,7 @@ public class PlayerControls : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(SpawnObjects());
+        //StartCoroutine(SpawnObjects());
         SpaceShip = GameObject.Find("spaceship");
         hit = true;
         mainCamera = Camera.main;       // Get a reference to the main camera
@@ -34,6 +35,7 @@ public class PlayerControls : MonoBehaviour
 
     void Update()
     {
+        StartCoroutine(SpawnObjects());
         // Iterate through all active touches.
         for (int i = 0; i < Input.touchCount; i++)
         {
@@ -63,7 +65,8 @@ public class PlayerControls : MonoBehaviour
 
     IEnumerator SpawnObjects()
     {
-        while (true)
+
+        while (shoot)
         {
             // Wait for the specified spawnInterval.
             yield return new WaitForSeconds(spawnInterval);
@@ -76,8 +79,8 @@ public class PlayerControls : MonoBehaviour
 
     void Move(float direction)
     {
-        if (UI.isPause)
-            return;
+        /*if (UI.isPause)
+            return;*/
         
         // Calculate the new position based on the direction and moveSpeed.
         Vector3 newPosition = transform.position + new Vector3(direction * moveSpeed * Time.deltaTime, 0, 0);
